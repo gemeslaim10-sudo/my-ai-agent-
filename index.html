@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة أسعار وخدمات تصميم المواقع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- مكتبة Markdown لتحويل ردود الذكاء الاصطناعي لنصوص منسقة -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0369a1', // أزرق سماوي غامق (Sky 700)
+                        secondary: '#0c4a6e', // درجة أغمق للعناوين (Sky 900)
+                        light: '#f0f9ff', // خلفية فاتحة جداً (Sky 50)
+                        chat: '#e0f2fe', // لون خلفية رسائل الشات
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .table-container {
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Chat Widget Styles */
+        .chat-slide-up {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        /* تنسيق نصوص المارك داون داخل الشات */
+        .prose p { margin-bottom: 0.5rem; }
+        .prose ul { list-style-type: disc; padding-right: 1.5rem; margin-bottom: 0.5rem; }
+        .prose strong { font-weight: 800; color: #0c4a6e; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 relative">
+
+    <!-- Header -->
+    <header class="bg-primary text-white py-10 border-b-4 border-secondary">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">باقات خدمات الويب والحلول الرقمية</h1>
+            <p class="text-sky-100 text-lg">حلول تقنية حديثة، أسعار تنافسية، وهوية بصرية تعبر عنك</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-12 space-y-12">
+
+        <!-- القسم الأول: جدول الخدمات -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1.5 h-8 bg-primary rounded-full"></div>
+                <h2 class="text-2xl font-bold text-secondary">مقارنة الباقات والأسعار</h2>
+            </div>
+            
+            <div class="table-container bg-white border border-slate-200">
+                <table class="w-full text-sm text-right">
+                    <thead class="bg-primary text-white uppercase font-bold">
+                        <tr>
+                            <th class="px-6 py-4 whitespace-nowrap">المطلوب</th>
+                            <th class="px-6 py-4">الصفحات</th>
+                            <th class="px-6 py-4">التقنيات</th>
+                            <th class="px-6 py-4 whitespace-nowrap">السعر (ج.م)</th>
+                            <th class="px-6 py-4">تكلفة الاستضافة</th>
+                            <th class="px-6 py-4">الاستضافة</th>
+                            <th class="px-6 py-4">SEO</th>
+                            <th class="px-6 py-4">سهولة التعديل</th>
+                            <th class="px-6 py-4 min-w-[250px]">ملاحظات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- صفحة هبوط -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">صفحة هبوط إعلانية (Landing Page)</td>
+                            <td class="px-6 py-4">صفحة واحدة طويلة</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">3,000</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
+                            <td class="px-6 py-4">Cloudflare Pages</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل التصميم والربط بالدومين. سرعة خيالية للإعلانات.</td>
+                        </tr>
+                        <!-- منيو مطعم -->
+                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">منيو مطعم (QR Code)</td>
+                            <td class="px-6 py-4">قائمة طعام وصور</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">3,500</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
+                            <td class="px-6 py-4">Cloudflare Pages</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">سريع جداً على الموبايل، لا يحتاج إنترنت قوي للتحميل.</td>
+                        </tr>
+                        <!-- معرض أعمال -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">معرض أعمال (Portfolio)</td>
+                            <td class="px-6 py-4">1-4 صفحات</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">4,500</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
+                            <td class="px-6 py-4">Cloudflare / GitHub</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">مثالي للمصممين والمهندسين، تصميم مميز وشخصي.</td>
+                        </tr>
+                        <!-- موقع شركات -->
+                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">موقع تعريفي للشركات</td>
+                            <td class="px-6 py-4">5-7 صفحات</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">6,500</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
+                            <td class="px-6 py-4">Cloudflare / GitHub</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">يشمل فورم تواصل يعمل، خريطة جوجل، وربط السوشيال ميديا.</td>
+                        </tr>
+                         <!-- Shopify -->
+                         <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (Shopify)</td>
+                            <td class="px-6 py-4">منتجات غير محدودة</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Shopify</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">8,000</td>
+                            <td class="px-6 py-4 text-red-500 font-bold">تبدأ من 29$</td>
+                            <td class="px-6 py-4">Shopify Servers</td>
+                            <td class="px-6 py-4 text-blue-600 font-bold">جيد جداً</td>
+                            <td class="px-6 py-4">سهل جداً</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل تهيئة المتجر، التصميم، والربط. الدفع الشهري للمنصة.</td>
+                        </tr>
+                        <!-- WordPress Blog -->
+                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">مدونة احترافية / إخبارية</td>
+                            <td class="px-6 py-4">أرشيف غير محدود</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">WordPress</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">8,000</td>
+                            <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
+                            <td class="px-6 py-4">Hostinger / Bluehost</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل جداً</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل القالب والتهيئة والحماية الأساسية.</td>
+                        </tr>
+                        <!-- WP + WooCommerce -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (WooCommerce)</td>
+                            <td class="px-6 py-4">منتجات غير محدودة</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">WordPress + Woo</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">10,000</td>
+                            <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
+                            <td class="px-6 py-4">Shared / VPS</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">سهل</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">ملكية كاملة للداتا بدون عمولات مبيعات للمنصة.</td>
+                        </tr>
+                        <!-- حجز مواعيد -->
+                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">نظام حجز مواعيد</td>
+                            <td class="px-6 py-4">تقويم، حجز، ورديات</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">12,000</td>
+                            <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
+                            <td class="px-6 py-4">Vercel + Supabase</td>
+                            <td class="px-6 py-4 text-blue-600 font-bold">جيد</td>
+                            <td class="px-6 py-4">متوسط</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">برمجة خاصة لضمان عدم تضارب المواعيد وإدارة الورديات.</td>
+                        </tr>
+                         <!-- عقارات -->
+                         <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-secondary">موقع عقارات / دليل</td>
+                            <td class="px-6 py-4">بحث متقدم، فلترة</td>
+                            <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
+                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">15,000</td>
+                            <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
+                            <td class="px-6 py-4">Vercel + Supabase</td>
+                            <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
+                            <td class="px-6 py-4">متوسط</td>
+                            <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">يشمل لوحة تحكم لإضافة العقارات ونظام فلترة متقدم.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- القسم الثاني: ملاحظات هامة -->
+        <section class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm hover:border-primary transition-colors duration-300">
+                <div class="w-12 h-12 bg-light text-primary rounded-full flex items-center justify-center mb-4 text-xl">
+                    <i class="fa-solid fa-paintbrush"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2 text-secondary">الهوية البصرية</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    جميع المواقع يتم تصميمها بناءً على الهوية البصرية الخاصة بكم (الألوان، اللوجو، الخطوط) لتعبر تماماً عن البراند الخاص بكم وليست مجرد قوالب جاهزة.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm hover:border-primary transition-colors duration-300">
+                <div class="w-12 h-12 bg-light text-primary rounded-full flex items-center justify-center mb-4 text-xl">
+                    <i class="fa-solid fa-puzzle-piece"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2 text-secondary">حلول مخصصة</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    الأسعار أعلاه هي للباقات الأساسية والمتوسطة، ومتاح لدينا تنفيذ مواقع بمواصفات خاصة جداً وأسعار يتم تحديدها بناءً على حجم المشروع.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm hover:border-primary transition-colors duration-300">
+                <div class="w-12 h-12 bg-light text-primary rounded-full flex items-center justify-center mb-4 text-xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2 text-secondary">الصيانة والدعم</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    جميع الباقات تشمل <span class="font-bold text-primary">صيانة مجانية لمدة سنة كاملة</span> (ضمان ضد العيوب البرمجية وتأكد من استقرار الموقع).
+                </p>
+            </div>
+        </section>
+
+        <!-- القسم الثالث: الإضافات والعروض -->
+        <section class="bg-secondary text-white rounded-2xl p-8 shadow-lg">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-2">إضافات مدفوعة (Add-ons)</h2>
+                <p class="text-sky-200">عروض وخصومات حصرية لفترة محدودة</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-right border-separate border-spacing-y-3">
+                    <thead>
+                        <tr class="text-sky-200 text-sm">
+                            <th class="px-4 pb-2">الإضافة / الخدمة</th>
+                            <th class="px-4 pb-2">الوصف</th>
+                            <th class="px-4 pb-2">السعر الأصلي</th>
+                            <th class="px-4 pb-2">السعر بعد الخصم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- AI Agent -->
+                        <tr class="bg-white/10 hover:bg-white/20 transition-colors">
+                            <td class="px-4 py-4 rounded-r-lg font-bold flex items-center gap-2">
+                                <i class="fa-solid fa-robot text-sky-300"></i>
+                                الموظف الذكي (AI Agent)
+                            </td>
+                            <td class="px-4 py-4 text-sm text-sky-100">شات بوت ذكي يرد على العملاء 24/7</td>
+                            <td class="px-4 py-4 text-slate-400 line-through">4,000 ج.م</td>
+                            <td class="px-4 py-4 rounded-l-lg">
+                                <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">1,200 ج.م</span>
+                                <span class="text-xs text-emerald-300 block mt-1">خصم 70%</span>
+                            </td>
+                        </tr>
+                        <!-- SEO -->
+                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                            <td class="px-4 py-4 rounded-r-lg font-bold">تهيئة SEO والخرائط</td>
+                            <td class="px-4 py-4 text-sm text-sky-100">Sitemap وربط Google Console</td>
+                            <td class="px-4 py-4 text-slate-400 line-through">500 ج.م</td>
+                            <td class="px-4 py-4 rounded-l-lg">
+                                <span class="text-white font-bold">250 ج.م</span>
+                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            </td>
+                        </tr>
+                        <!-- Dark Mode -->
+                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                            <td class="px-4 py-4 rounded-r-lg font-bold">الوضع الليلي (Dark Mode)</td>
+                            <td class="px-4 py-4 text-sm text-sky-100">زر تبديل الإضاءة</td>
+                            <td class="px-4 py-4 text-slate-400 line-through">1,000 ج.م</td>
+                            <td class="px-4 py-4 rounded-l-lg">
+                                <span class="text-white font-bold">500 ج.م</span>
+                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            </td>
+                        </tr>
+                        <!-- Multi Lang -->
+                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                            <td class="px-4 py-4 rounded-r-lg font-bold">موقع ثنائي اللغة</td>
+                            <td class="px-4 py-4 text-sm text-sky-100">إضافة لغة ثانية ولوحة تحكم مزدوجة</td>
+                            <td class="px-4 py-4 text-slate-400 line-through">2,500 ج.م</td>
+                            <td class="px-4 py-4 rounded-l-lg">
+                                <span class="text-white font-bold">1,250 ج.م</span>
+                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate-500 text-sm mt-12 pt-8 border-t border-slate-200">
+            <p>&copy; 2024 جميع الحقوق محفوظة لخدمات التصميم والتطوير.</p>
+        </footer>
+
+    </div>
+
+    <!-- AI Agent Chat Widget -->
+    <!-- Button Trigger -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChat()" class="bg-secondary hover:bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110 relative">
+            <i class="fa-solid fa-robot text-2xl"></i>
+            <span class="absolute -top-1 -right-1 bg-red-500 w-4 h-4 rounded-full animate-ping"></span>
+        </button>
+    </div>
+
+    <!-- Chat Box -->
+    <div id="chatBox" class="fixed bottom-24 right-6 w-96 max-w-[90vw] bg-white rounded-2xl shadow-2xl z-50 hidden border border-slate-200 overflow-hidden flex flex-col h-[500px] transition-all duration-300">
+        <!-- Chat Header -->
+        <div class="bg-secondary text-white p-4 flex justify-between items-center shadow-md">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm">المساعد الذكي (AI)</h3>
+                    <div class="flex items-center gap-1">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span class="text-xs text-sky-200">متصل الآن</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-white/70 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Chat Body -->
+        <div id="chatBody" class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 scroll-smooth">
+            <!-- Messages will appear here -->
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="p-3 bg-white border-t border-slate-100">
+            <form id="chatForm" onsubmit="handleSend(event)" class="flex gap-2">
+                <input type="text" id="userInput" placeholder="اكتب استفسارك هنا..." class="flex-1 border border-slate-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" autocomplete="off">
+                <button type="submit" id="sendButton" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_KEY = "AIzaSyBvu2oZI2uu7O9B2MdpPj_eck2UFZ3ws0k"; // Key provided by user
+        let API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`; // Fallback default
+        const WHATSAPP_NUMBER = "201024531452";
+
+        // Function to fetch the best available model dynamically
+        async function updateModelDynamically() {
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+                const data = await res.json();
+                
+                if (data.models) {
+                    // Look for models that support generateContent
+                    const capableModels = data.models.filter(model => 
+                        model.supportedGenerationMethods && 
+                        model.supportedGenerationMethods.includes("generateContent")
+                    );
+
+                    // Strategy: Prefer gemini-1.5-flash, then gemini-1.5-pro, then any gemini
+                    let bestModel = capableModels.find(m => m.name.includes("gemini-1.5-flash"));
+                    if (!bestModel) bestModel = capableModels.find(m => m.name.includes("gemini-1.5-pro"));
+                    if (!bestModel) bestModel = capableModels.find(m => m.name.includes("gemini"));
+
+                    if (bestModel) {
+                        API_URL = `https://generativelanguage.googleapis.com/v1beta/${bestModel.name}:generateContent?key=${API_KEY}`;
+                        console.log(`Using Model: ${bestModel.name}`);
+                    }
+                }
+            } catch (e) {
+                console.warn("Could not fetch models dynamically, using default.", e);
+            }
+        }
+        
+        // Call immediately
+        updateModelDynamically();
+
+        // System Prompt - مغذى بجميع البيانات والأسعار والتعليمات
+        const SYSTEM_PROMPT = `
+أنت "الموظف الذكي"، مساعد مبيعات محترف لشركة تصميم مواقع وحلول رقمية.
+مهمتك: مساعدة العملاء في اختيار الباقة المناسبة، الرد على استفساراتهم، وإقناعهم بالإضافة المدفوعة (Upselling)، ثم إغلاق الصفقة وتوجيههم للواتساب.
+
+البيانات والأسعار (العملة: جنيه مصري ج.م):
+1. **صفحة هبوط (Landing Page)**: 3,000 ج.م - استضافة مجانية - مناسبة للإعلانات.
+2. **منيو مطعم (QR Code)**: 3,500 ج.م - استضافة مجانية - سريع جداً للموبايل.
+3. **معرض أعمال (Portfolio)**: 4,500 ج.م - استضافة مجانية - للمصممين والمهندسين.
+4. **موقع تعريفي للشركات**: 6,500 ج.م - استضافة مجانية - 5-7 صفحات للشركات.
+5. **متجر Shopify**: 8,000 ج.م - (الاشتراك الشهري للمنصة يبدأ من 29$) - سهل الإدارة.
+6. **مدونة WordPress**: 8,000 ج.م - استضافة مدفوعة (5-20$).
+7. **متجر WooCommerce**: 10,000 ج.م - استضافة مدفوعة - ملكية كاملة للداتا.
+8. **نظام حجز مواعيد**: 12,000 ج.م - استضافة مجانية في البداية.
+9. **موقع عقارات**: 15,000 ج.م.
+
+العروض والخصومات الحصرية (حاول بيعها):
+- **تهيئة SEO**: بـ 250 ج (بدلاً من 500) - خصم 50%.
+- **الوضع الليلي (Dark Mode)**: بـ 500 ج (بدلاً من 1000) - خصم 50%.
+- **لغة إضافية**: بـ 1250 ج (بدلاً من 2500) - خصم 50%.
+- **الموظف الذكي (AI Agent)**: بـ 1200 ج (بدلاً من 4000) - خصم 70% (صفقة رابحة جداً!).
+
+تعليمات الشخصية:
+- تحدث باللهجة المصرية الودودة والمحترفة (مثل: "أهلاً بك يا فندم"، "تحت أمرك"، "إيه رأيك نضيف...").
+- كن مختصراً ومفيداً.
+- إذا كان العميل متردداً، اشرح له ميزة التقنية (مثلاً: الـ Static سريع جداً وآمن).
+- **قاعدة ذهبية**: عند انتهاء الاتفاق وتأكيد العميل للطلب، يجب أن تخرج ملخص الطلب النهائي والسعر الإجمالي محصوراً بين ثلاثة أقواس معقوفة هكذا:
+{{{ تفاصيل الطلب: موقع كذا + إضافة كذا. الإجمالي: كذا ج.م }}}
+- لا تظهر الأقواس {{{ }}} إلا في نهاية المحادثة عندما يقرر العميل الشراء، لكي يتم تفعيل زر الواتساب تلقائياً.
+`;
+
+        // Chat History State
+        let chatHistory = [
+            {
+                role: "user",
+                parts: [{ text: SYSTEM_PROMPT }]
+            },
+            {
+                role: "model",
+                parts: [{ text: "أهلاً بك يا فندم! 👋 أنا المساعد الذكي لمساعدتك في اختيار موقعك الجديد. إيه نوع المشروع اللي بتفكر فيه؟ (متجر، موقع شركة، ولا حاجة تانية؟)" }]
+            }
+        ];
+
+        // DOM Elements
+        const chatBox = document.getElementById('chatBox');
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Toggle Chat
+        function toggleChat() {
+            chatBox.classList.toggle('hidden');
+            if (!chatBox.classList.contains('hidden') && chatBody.children.length === 0) {
+                // Show initial message
+                renderMessage(chatHistory[1].parts[0].text, 'model');
+            }
+        }
+
+        // Render Message to UI
+        function renderMessage(text, sender) {
+            const div = document.createElement('div');
+            
+            if (sender === 'user') {
+                div.className = 'bg-primary text-white p-3 rounded-bl-2xl rounded-tr-2xl rounded-tl-2xl w-fit self-end text-sm mb-2 shadow-sm chat-slide-up ml-auto max-w-[85%]';
+                div.textContent = text;
+            } else {
+                div.className = 'bg-white border border-slate-200 text-slate-700 p-3 rounded-br-2xl rounded-tr-2xl rounded-tl-2xl w-fit self-start text-sm mb-2 shadow-sm chat-slide-up max-w-[90%] prose prose-sm';
+                // Parse Markdown safely
+                div.innerHTML = marked.parse(text);
+            }
+            
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Show Loading Indicator
+        function showLoading() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'loadingIndicator';
+            typingDiv.className = 'flex gap-2 mb-2 p-3 bg-chat rounded-br-2xl rounded-tr-2xl rounded-tl-2xl w-fit self-start text-sm text-slate-700 items-center';
+            typingDiv.innerHTML = `
+                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+            `;
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function removeLoading() {
+            const loader = document.getElementById('loadingIndicator');
+            if (loader) loader.remove();
+        }
+
+        // Handle Send
+        async function handleSend(e) {
+            e.preventDefault();
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // UI Updates
+            userInput.value = '';
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            renderMessage(text, 'user');
+            showLoading();
+
+            // Add to history
+            chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Logging for debug
+                console.log("Gemini API Response:", data);
+
+                if (!response.ok) {
+                    throw new Error(data.error?.message || `API Error: ${response.status}`);
+                }
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    removeLoading();
+
+                    // Check for Order Summary Pattern {{{ ... }}}
+                    const summaryMatch = aiResponse.match(/\{\{\{([\s\S]+?)\}\}\}/);
+                    
+                    let displayText = aiResponse;
+                    if (summaryMatch) {
+                        // Extract summary and hide the tags from display
+                        displayText = aiResponse.replace(/\{\{\{([\s\S]+?)\}\}\}/g, "$1");
+                        const orderSummary = summaryMatch[1].trim();
+                        
+                        renderMessage(displayText, 'model');
+                        showWhatsAppButton(orderSummary);
+                    } else {
+                        renderMessage(displayText, 'model');
+                    }
+
+                    // Add to history
+                    chatHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+                } else {
+                     // Handle blocked or empty response
+                     if (data.promptFeedback && data.promptFeedback.blockReason) {
+                         throw new Error(`Blocked by safety: ${data.promptFeedback.blockReason}`);
+                     }
+                    throw new Error("No response candidates returned from AI.");
+                }
+
+            } catch (error) {
+                console.error("Chat Error Details:", error);
+                removeLoading();
+                
+                // Important: Remove the last user message from history so we don't have (User -> User) sequence next time which causes 400 error.
+                chatHistory.pop();
+                
+                renderMessage(`⚠️ عذراً، حدث خطأ: ${error.message || "يرجى المحاولة مرة أخرى."}`, 'model');
+            } finally {
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        // Add WhatsApp Button dynamically
+        function showWhatsAppButton(summary) {
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("مرحباً، اتفقت مع المساعد الذكي على الطلب التالي:\n" + summary)}`;
+            
+            const btnContainer = document.createElement('div');
+            btnContainer.className = 'chat-slide-up mt-4 text-center pb-2 border-t border-slate-100 pt-4';
+            btnContainer.innerHTML = `
+                <a href="${url}" target="_blank" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform transform hover:-translate-y-1 w-full justify-center">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>إتمام الطلب عبر واتساب</span>
+                </a>
+                <p class="text-xs text-slate-400 mt-2">سيتم نقل تفاصيل طلبك تلقائياً</p>
+            `;
+            chatBody.appendChild(btnContainer);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+    </script>
+</body>
+</html>
