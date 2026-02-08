@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قائمة أسعار وخدمات تصميم المواقع</title>
+    <title>GAMALTECH - قائمة أسعار وخدمات تصميم المواقع</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -58,6 +58,29 @@
         .prose p { margin-bottom: 0.5rem; }
         .prose ul { list-style-type: disc; padding-right: 1.5rem; margin-bottom: 0.5rem; }
         .prose strong { font-weight: 800; color: #0c4a6e; }
+
+        /* تأثير الزر العائم الجديد */
+        .whatsapp-float-btn {
+            opacity: 0;
+            transform: translate(-50%, 10px); /* يبدأ من الأسفل قليلاً */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* غير قابل للنقر وهو مختفي */
+        }
+        
+        tr:hover .whatsapp-float-btn {
+            opacity: 1;
+            transform: translate(-50%, 0); /* يرتفع لمكانه الطبيعي */
+            pointer-events: auto;
+        }
+
+        /* تحريك السعر قليلاً للأعلى عند الهوفر لإفساح المجال */
+        .price-text {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        tr:hover .price-text {
+            transform: translateY(-8px);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 relative">
@@ -65,6 +88,7 @@
     <!-- Header -->
     <header class="bg-primary text-white py-10 border-b-4 border-secondary">
         <div class="container mx-auto px-4 text-center">
+            <h2 class="text-sky-200 font-bold text-xl mb-2 tracking-wider">GAMALTECH</h2>
             <h1 class="text-3xl md:text-4xl font-bold mb-2">باقات خدمات الويب والحلول الرقمية</h1>
             <p class="text-sky-100 text-lg">حلول تقنية حديثة، أسعار تنافسية، وهوية بصرية تعبر عنك</p>
         </div>
@@ -77,6 +101,7 @@
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-1.5 h-8 bg-primary rounded-full"></div>
                 <h2 class="text-2xl font-bold text-secondary">مقارنة الباقات والأسعار</h2>
+                <p class="text-sm text-slate-500 mr-2">(مرر الفأرة على أي صف لإظهار زر الطلب)</p>
             </div>
             
             <div class="table-container bg-white border border-slate-200">
@@ -86,7 +111,7 @@
                             <th class="px-6 py-4 whitespace-nowrap">المطلوب</th>
                             <th class="px-6 py-4">الصفحات</th>
                             <th class="px-6 py-4">التقنيات</th>
-                            <th class="px-6 py-4 whitespace-nowrap">السعر (ج.م)</th>
+                            <th class="px-6 py-4 whitespace-nowrap text-center">السعر</th>
                             <th class="px-6 py-4">تكلفة الاستضافة</th>
                             <th class="px-6 py-4">الاستضافة</th>
                             <th class="px-6 py-4">SEO</th>
@@ -95,108 +120,176 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-200">
+                        <!-- دالة توليد الأزرار -->
+                        <script>
+                            function getWhatsappBtn(item, price) {
+                                const phone = "201024531452";
+                                const text = encodeURIComponent(`مرحباً GAMALTECH، أرغب في طلب خدمة: ${item} بسعر ${price}`);
+                                return `
+                                    <a href="https://wa.me/${phone}?text=${text}" target="_blank" 
+                                       class="whatsapp-float-btn absolute bottom-2 left-1/2 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-1 px-3 rounded-full shadow-lg border border-green-400 z-10 whitespace-nowrap">
+                                       <i class="fa-brands fa-whatsapp text-sm"></i> طلب عبر واتساب
+                                    </a>
+                                `;
+                            }
+                        </script>
+
                         <!-- صفحة هبوط -->
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="group hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">صفحة هبوط إعلانية (Landing Page)</td>
                             <td class="px-6 py-4">صفحة واحدة طويلة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">3,000</td>
+                            
+                            <!-- السعر وزر الواتساب -->
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">3,000</span>
+                                <script>document.write(getWhatsappBtn('صفحة هبوط إعلانية', '3,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare Pages</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل التصميم والربط بالدومين. سرعة خيالية للإعلانات.</td>
                         </tr>
+
                         <!-- منيو مطعم -->
-                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                        <tr class="group bg-slate-50/50 hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">منيو مطعم (QR Code)</td>
                             <td class="px-6 py-4">قائمة طعام وصور</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">3,500</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">3,500</span>
+                                <script>document.write(getWhatsappBtn('منيو مطعم QR', '3,500 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare Pages</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">سريع جداً على الموبايل، لا يحتاج إنترنت قوي للتحميل.</td>
                         </tr>
+
                         <!-- معرض أعمال -->
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="group hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">معرض أعمال (Portfolio)</td>
                             <td class="px-6 py-4">1-4 صفحات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">4,500</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">4,500</span>
+                                <script>document.write(getWhatsappBtn('معرض أعمال', '4,500 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare / GitHub</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">مثالي للمصممين والمهندسين، تصميم مميز وشخصي.</td>
                         </tr>
+
                         <!-- موقع شركات -->
-                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                        <tr class="group bg-slate-50/50 hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">موقع تعريفي للشركات</td>
                             <td class="px-6 py-4">5-7 صفحات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">6,500</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">6,500</span>
+                                <script>document.write(getWhatsappBtn('موقع شركات', '6,500 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare / GitHub</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">يشمل فورم تواصل يعمل، خريطة جوجل، وربط السوشيال ميديا.</td>
                         </tr>
-                         <!-- Shopify -->
-                         <tr class="hover:bg-slate-50 transition-colors">
+
+                        <!-- Shopify -->
+                        <tr class="group hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (Shopify)</td>
                             <td class="px-6 py-4">منتجات غير محدودة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Shopify</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">8,000</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">8,000</span>
+                                <script>document.write(getWhatsappBtn('متجر Shopify', '8,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-red-500 font-bold">تبدأ من 29$</td>
                             <td class="px-6 py-4">Shopify Servers</td>
                             <td class="px-6 py-4 text-blue-600 font-bold">جيد جداً</td>
                             <td class="px-6 py-4">سهل جداً</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل تهيئة المتجر، التصميم، والربط. الدفع الشهري للمنصة.</td>
                         </tr>
+
                         <!-- WordPress Blog -->
-                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                        <tr class="group bg-slate-50/50 hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">مدونة احترافية / إخبارية</td>
                             <td class="px-6 py-4">أرشيف غير محدود</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">WordPress</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">8,000</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">8,000</span>
+                                <script>document.write(getWhatsappBtn('مدونة ووردبريس', '8,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
                             <td class="px-6 py-4">Hostinger / Bluehost</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل جداً</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">السعر يشمل القالب والتهيئة والحماية الأساسية.</td>
                         </tr>
+
                         <!-- WP + WooCommerce -->
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="group hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (WooCommerce)</td>
                             <td class="px-6 py-4">منتجات غير محدودة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">WordPress + Woo</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">10,000</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">10,000</span>
+                                <script>document.write(getWhatsappBtn('متجر WooCommerce', '10,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
                             <td class="px-6 py-4">Shared / VPS</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
                             <td class="px-6 py-4">سهل</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">ملكية كاملة للداتا بدون عمولات مبيعات للمنصة.</td>
                         </tr>
+
                         <!-- حجز مواعيد -->
-                        <tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+                        <tr class="group bg-slate-50/50 hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">نظام حجز مواعيد</td>
                             <td class="px-6 py-4">تقويم، حجز، ورديات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">12,000</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">12,000</span>
+                                <script>document.write(getWhatsappBtn('نظام حجز مواعيد', '12,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
                             <td class="px-6 py-4">Vercel + Supabase</td>
                             <td class="px-6 py-4 text-blue-600 font-bold">جيد</td>
                             <td class="px-6 py-4">متوسط</td>
                             <td class="px-6 py-4 text-slate-500 text-xs leading-relaxed">برمجة خاصة لضمان عدم تضارب المواعيد وإدارة الورديات.</td>
                         </tr>
-                         <!-- عقارات -->
-                         <tr class="hover:bg-slate-50 transition-colors">
+
+                        <!-- عقارات -->
+                        <tr class="group hover:bg-sky-50 transition-colors relative">
                             <td class="px-6 py-4 font-bold text-secondary">موقع عقارات / دليل</td>
                             <td class="px-6 py-4">بحث متقدم، فلترة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
-                            <td class="px-6 py-4 font-bold text-lg text-emerald-600">15,000</td>
+                            
+                            <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
+                                <span class="price-text font-bold text-lg text-emerald-600">15,000</span>
+                                <script>document.write(getWhatsappBtn('موقع عقارات', '15,000 ج.م'))</script>
+                            </td>
+
                             <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
                             <td class="px-6 py-4">Vercel + Supabase</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -255,51 +348,70 @@
                             <th class="px-4 pb-2">الإضافة / الخدمة</th>
                             <th class="px-4 pb-2">الوصف</th>
                             <th class="px-4 pb-2">السعر الأصلي</th>
-                            <th class="px-4 pb-2">السعر بعد الخصم</th>
+                            <th class="px-4 pb-2 text-center">السعر بعد الخصم</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- AI Agent -->
-                        <tr class="bg-white/10 hover:bg-white/20 transition-colors">
+                        <tr class="group bg-white/10 hover:bg-white/20 transition-colors relative">
                             <td class="px-4 py-4 rounded-r-lg font-bold flex items-center gap-2">
                                 <i class="fa-solid fa-robot text-sky-300"></i>
                                 الموظف الذكي (AI Agent)
                             </td>
                             <td class="px-4 py-4 text-sm text-sky-100">شات بوت ذكي يرد على العملاء 24/7</td>
                             <td class="px-4 py-4 text-slate-400 line-through">4,000 ج.م</td>
-                            <td class="px-4 py-4 rounded-l-lg">
-                                <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">1,200 ج.م</span>
-                                <span class="text-xs text-emerald-300 block mt-1">خصم 70%</span>
+                            
+                            <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
+                                <div class="price-text">
+                                    <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">1,200 ج.م</span>
+                                    <span class="text-xs text-emerald-300 block mt-1">خصم 70%</span>
+                                </div>
+                                <script>document.write(getWhatsappBtn('الموظف الذكي (AI Agent)', '1,200 ج.م'))</script>
                             </td>
                         </tr>
+
                         <!-- SEO -->
-                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                        <tr class="group bg-white/5 hover:bg-white/10 transition-colors relative">
                             <td class="px-4 py-4 rounded-r-lg font-bold">تهيئة SEO والخرائط</td>
                             <td class="px-4 py-4 text-sm text-sky-100">Sitemap وربط Google Console</td>
                             <td class="px-4 py-4 text-slate-400 line-through">500 ج.م</td>
-                            <td class="px-4 py-4 rounded-l-lg">
-                                <span class="text-white font-bold">250 ج.م</span>
-                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            
+                            <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
+                                <div class="price-text">
+                                    <span class="text-white font-bold">250 ج.م</span>
+                                    <span class="text-xs text-sky-300 block">خصم 50%</span>
+                                </div>
+                                <script>document.write(getWhatsappBtn('تهيئة SEO', '250 ج.م'))</script>
                             </td>
                         </tr>
+
                         <!-- Dark Mode -->
-                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                        <tr class="group bg-white/5 hover:bg-white/10 transition-colors relative">
                             <td class="px-4 py-4 rounded-r-lg font-bold">الوضع الليلي (Dark Mode)</td>
                             <td class="px-4 py-4 text-sm text-sky-100">زر تبديل الإضاءة</td>
                             <td class="px-4 py-4 text-slate-400 line-through">1,000 ج.م</td>
-                            <td class="px-4 py-4 rounded-l-lg">
-                                <span class="text-white font-bold">500 ج.م</span>
-                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            
+                            <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
+                                <div class="price-text">
+                                    <span class="text-white font-bold">500 ج.م</span>
+                                    <span class="text-xs text-sky-300 block">خصم 50%</span>
+                                </div>
+                                <script>document.write(getWhatsappBtn('الوضع الليلي', '500 ج.م'))</script>
                             </td>
                         </tr>
+
                         <!-- Multi Lang -->
-                        <tr class="bg-white/5 hover:bg-white/10 transition-colors">
+                        <tr class="group bg-white/5 hover:bg-white/10 transition-colors relative">
                             <td class="px-4 py-4 rounded-r-lg font-bold">موقع ثنائي اللغة</td>
                             <td class="px-4 py-4 text-sm text-sky-100">إضافة لغة ثانية ولوحة تحكم مزدوجة</td>
                             <td class="px-4 py-4 text-slate-400 line-through">2,500 ج.م</td>
-                            <td class="px-4 py-4 rounded-l-lg">
-                                <span class="text-white font-bold">1,250 ج.م</span>
-                                <span class="text-xs text-sky-300 block">خصم 50%</span>
+                            
+                            <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
+                                <div class="price-text">
+                                    <span class="text-white font-bold">1,250 ج.م</span>
+                                    <span class="text-xs text-sky-300 block">خصم 50%</span>
+                                </div>
+                                <script>document.write(getWhatsappBtn('موقع ثنائي اللغة', '1,250 ج.م'))</script>
                             </td>
                         </tr>
                     </tbody>
@@ -346,7 +458,7 @@
 
         <!-- Footer -->
         <footer class="text-center text-slate-500 text-sm mt-12 pt-8 border-t border-slate-200">
-            <p>&copy; 2024 جميع الحقوق محفوظة لخدمات التصميم والتطوير.</p>
+            <p>&copy; 2024 جميع الحقوق محفوظة لشركة GAMALTECH.</p>
         </footer>
 
     </div>
@@ -399,7 +511,7 @@
 
     <script>
         // API Configuration
-        const API_KEY = "AIzaSyBvu2oZI2uu7O9B2MdpPj_eck2UFZ3ws0k"; // Key provided by user
+        const API_KEY = "AIzaSyAOYRZ75vMhuwTqbNRpY33n11TNG0jvx2k"; // Key provided by user
         let API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`; // Fallback default
         const WHATSAPP_NUMBER = "201024531452";
 
@@ -436,7 +548,7 @@
 
         // System Prompt - مغذى بجميع البيانات والأسعار والتعليمات
         const SYSTEM_PROMPT = `
-أنت "الموظف الذكي"، مساعد مبيعات محترف لشركة تصميم مواقع وحلول رقمية.
+أنت "الموظف الذكي"، مساعد مبيعات محترف لشركة "GAMALTECH" لتصميم المواقع والحلول الرقمية.
 مهمتك: مساعدة العملاء في اختيار الباقة المناسبة، الرد على استفساراتهم، وإقناعهم بالإضافة المدفوعة (Upselling)، ثم إغلاق الصفقة وتوجيههم للواتساب.
 
 البيانات والأسعار (العملة: جنيه مصري ج.م):
@@ -458,6 +570,7 @@
 
 تعليمات الشخصية:
 - تحدث باللهجة المصرية الودودة والمحترفة (مثل: "أهلاً بك يا فندم"، "تحت أمرك"، "إيه رأيك نضيف...").
+- عرف عن نفسك بأنك مساعد من شركة GAMALTECH.
 - كن مختصراً ومفيداً.
 - إذا كان العميل متردداً، اشرح له ميزة التقنية (مثلاً: الـ Static سريع جداً وآمن).
 - **قاعدة ذهبية**: عند انتهاء الاتفاق وتأكيد العميل للطلب، يجب أن تخرج ملخص الطلب النهائي والسعر الإجمالي محصوراً بين ثلاثة أقواس معقوفة هكذا:
@@ -473,7 +586,7 @@
             },
             {
                 role: "model",
-                parts: [{ text: "أهلاً بك يا فندم! 👋 أنا المساعد الذكي لمساعدتك في اختيار موقعك الجديد. إيه نوع المشروع اللي بتفكر فيه؟ (متجر، موقع شركة، ولا حاجة تانية؟)" }]
+                parts: [{ text: "أهلاً بك يا فندم في GAMALTECH! 👋 أنا المساعد الذكي لمساعدتك في اختيار موقعك الجديد. إيه نوع المشروع اللي بتفكر فيه؟ (متجر، موقع شركة، ولا حاجة تانية؟)" }]
             }
         ];
 
@@ -608,7 +721,7 @@
 
         // Add WhatsApp Button dynamically
         function showWhatsAppButton(summary) {
-            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("مرحباً، اتفقت مع المساعد الذكي على الطلب التالي:\n" + summary)}`;
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("مرحباً GAMALTECH، اتفقت مع المساعد الذكي على الطلب التالي:\n" + summary)}`;
             
             const btnContainer = document.createElement('div');
             btnContainer.className = 'chat-slide-up mt-4 text-center pb-2 border-t border-slate-100 pt-4';
