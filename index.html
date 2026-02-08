@@ -59,27 +59,26 @@
         .prose ul { list-style-type: disc; padding-right: 1.5rem; margin-bottom: 0.5rem; }
         .prose strong { font-weight: 800; color: #0c4a6e; }
 
-        /* تأثير الزر العائم الجديد */
-        .whatsapp-float-btn {
-            opacity: 0;
-            transform: translate(-50%, 10px); /* يبدأ من الأسفل قليلاً */
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none; /* غير قابل للنقر وهو مختفي */
-        }
-        
-        tr:hover .whatsapp-float-btn {
-            opacity: 1;
-            transform: translate(-50%, 0); /* يرتفع لمكانه الطبيعي */
-            pointer-events: auto;
-        }
-
-        /* تحريك السعر قليلاً للأعلى عند الهوفر لإفساح المجال */
-        .price-text {
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-        tr:hover .price-text {
-            transform: translateY(-8px);
+        /* تأثير الزر العائم الجديد (للديسك توب فقط) */
+        @media (min-width: 1024px) {
+            .whatsapp-float-btn {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                pointer-events: none;
+            }
+            tr:hover .whatsapp-float-btn {
+                opacity: 1;
+                transform: translate(-50%, 0);
+                pointer-events: auto;
+            }
+            .price-text {
+                transition: transform 0.3s ease;
+                display: inline-block;
+            }
+            tr:hover .price-text {
+                transform: translateY(-8px);
+            }
         }
     </style>
 </head>
@@ -94,17 +93,78 @@
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-12 space-y-12">
+    <div class="container mx-auto px-4 py-8 md:py-12 space-y-12">
 
-        <!-- القسم الأول: جدول الخدمات -->
+        <!-- القسم الأول: الخدمات -->
         <section>
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-1.5 h-8 bg-primary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-secondary">مقارنة الباقات والأسعار</h2>
-                <p class="text-sm text-slate-500 mr-2">(مرر الفأرة على أي صف لإظهار زر الطلب)</p>
+                <div>
+                    <h2 class="text-2xl font-bold text-secondary">مقارنة الباقات والأسعار</h2>
+                    <p class="text-sm text-slate-500 hidden lg:block">(مرر الفأرة على أي صف لإظهار زر الطلب)</p>
+                </div>
             </div>
             
-            <div class="table-container bg-white border border-slate-200">
+            <!-- Mobile/Tablet Card View (Visible < lg) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:hidden">
+                <!-- Helper for generating mobile cards -->
+                <script>
+                    function getMobileCard(title, price, tech, pages, hosting, seo, edit, notes) {
+                        const phone = "201024531452";
+                        const text = encodeURIComponent(`مرحباً GAMALTECH، أرغب في طلب خدمة: ${title} بسعر ${price}`);
+                        
+                        return `
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-secondary leading-tight">${title}</h3>
+                                    <span class="text-xs font-mono text-primary bg-sky-100/50 px-2 py-1 rounded mt-2 inline-block">${tech}</span>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block font-bold text-xl text-emerald-600">${price}</span>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3 text-sm text-slate-600">
+                                <div class="flex justify-between border-b border-slate-50 pb-2">
+                                    <span>الصفحات:</span> <span class="font-semibold text-slate-800">${pages}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-50 pb-2">
+                                    <span>الاستضافة:</span> <span class="font-semibold text-emerald-600">${hosting}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-50 pb-2">
+                                    <span>SEO:</span> <span class="font-semibold text-green-600">${seo}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-50 pb-2">
+                                    <span>التعديل:</span> <span class="font-semibold text-slate-800">${edit}</span>
+                                </div>
+                                <p class="text-xs text-slate-400 bg-slate-50 p-2 rounded mt-2 leading-relaxed">
+                                    <i class="fa-solid fa-circle-info ml-1"></i> ${notes}
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 border-t border-slate-100">
+                                <a href="https://wa.me/${phone}?text=${text}" target="_blank" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow transition-colors">
+                                    <i class="fa-brands fa-whatsapp ml-2"></i> اطلب الآن
+                                </a>
+                            </div>
+                        </div>`;
+                    }
+                </script>
+
+                <script>
+                    document.write(getMobileCard('صفحة هبوط إعلانية', '3,000 ج.م', 'Sveltia CMS + GitHub', 'صفحة واحدة', '0$ (Cloudflare)', 'ممتاز', 'سهل', 'شامل التصميم والربط بالدومين. سرعة خيالية.'));
+                    document.write(getMobileCard('منيو مطعم (QR Code)', '3,500 ج.م', 'Sveltia CMS + GitHub', 'قائمة وصور', '0$ (Cloudflare)', 'ممتاز', 'سهل', 'سريع جداً للموبايل، لا يحتاج إنترنت قوي.'));
+                    document.write(getMobileCard('معرض أعمال', '4,500 ج.م', 'Sveltia CMS + GitHub', '1-4 صفحات', '0$ (Cloudflare)', 'ممتاز', 'سهل', 'تصميم مميز وشخصي للمصممين والمهندسين.'));
+                    document.write(getMobileCard('موقع شركات', '6,500 ج.م', 'Sveltia CMS + GitHub', '5-7 صفحات', '0$ (Cloudflare)', 'ممتاز', 'سهل', 'يشمل فورم تواصل، خريطة، وربط سوشيال.'));
+                    document.write(getMobileCard('متجر Shopify', '8,000 ج.م', 'Shopify', 'غير محدود', 'تبدأ من 29$', 'جيد جداً', 'سهل جداً', 'يشمل التهيئة والتصميم. الدفع الشهري للمنصة.'));
+                    document.write(getMobileCard('مدونة ووردبريس', '8,000 ج.م', 'WordPress', 'أرشيف غير محدود', '5$ - 20$', 'ممتاز', 'سهل جداً', 'يشمل القالب والتهيئة والحماية الأساسية.'));
+                    document.write(getMobileCard('متجر WooCommerce', '10,000 ج.م', 'WP + WooCommerce', 'غير محدود', '5$ - 20$', 'ممتاز', 'سهل', 'ملكية كاملة للداتا وبدون عمولات مبيعات.'));
+                    document.write(getMobileCard('نظام حجز مواعيد', '12,000 ج.م', 'Next.js + Supabase', 'تقويم، ورديات', 'مجاني ثم ~25$', 'جيد', 'متوسط', 'برمجة خاصة لمنع تضارب المواعيد.'));
+                    document.write(getMobileCard('موقع عقارات', '15,000 ج.م', 'Next.js + Supabase', 'بحث، فلترة', 'مجاني ثم ~25$', 'ممتاز', 'متوسط', 'لوحة تحكم وفلترة متقدمة للعقارات.'));
+                </script>
+            </div>
+
+            <!-- Desktop Table View (Visible >= lg) -->
+            <div class="hidden lg:block table-container bg-white border border-slate-200">
                 <table class="w-full text-sm text-right">
                     <thead class="bg-primary text-white uppercase font-bold">
                         <tr>
@@ -120,7 +180,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-200">
-                        <!-- دالة توليد الأزرار -->
+                        <!-- دالة توليد الأزرار للديسك توب -->
                         <script>
                             function getWhatsappBtn(item, price) {
                                 const phone = "201024531452";
@@ -139,13 +199,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">صفحة هبوط إعلانية (Landing Page)</td>
                             <td class="px-6 py-4">صفحة واحدة طويلة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            
-                            <!-- السعر وزر الواتساب -->
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">3,000</span>
                                 <script>document.write(getWhatsappBtn('صفحة هبوط إعلانية', '3,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare Pages</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -158,12 +215,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">منيو مطعم (QR Code)</td>
                             <td class="px-6 py-4">قائمة طعام وصور</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">3,500</span>
                                 <script>document.write(getWhatsappBtn('منيو مطعم QR', '3,500 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare Pages</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -176,12 +231,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">معرض أعمال (Portfolio)</td>
                             <td class="px-6 py-4">1-4 صفحات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">4,500</span>
                                 <script>document.write(getWhatsappBtn('معرض أعمال', '4,500 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare / GitHub</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -194,12 +247,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">موقع تعريفي للشركات</td>
                             <td class="px-6 py-4">5-7 صفحات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Sveltia CMS + GitHub SSG</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">6,500</span>
                                 <script>document.write(getWhatsappBtn('موقع شركات', '6,500 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-emerald-600 font-bold">0$</td>
                             <td class="px-6 py-4">Cloudflare / GitHub</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -212,12 +263,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (Shopify)</td>
                             <td class="px-6 py-4">منتجات غير محدودة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Shopify</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">8,000</span>
                                 <script>document.write(getWhatsappBtn('متجر Shopify', '8,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-red-500 font-bold">تبدأ من 29$</td>
                             <td class="px-6 py-4">Shopify Servers</td>
                             <td class="px-6 py-4 text-blue-600 font-bold">جيد جداً</td>
@@ -230,12 +279,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">مدونة احترافية / إخبارية</td>
                             <td class="px-6 py-4">أرشيف غير محدود</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">WordPress</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">8,000</span>
                                 <script>document.write(getWhatsappBtn('مدونة ووردبريس', '8,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
                             <td class="px-6 py-4">Hostinger / Bluehost</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -248,12 +295,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">متجر إلكتروني (WooCommerce)</td>
                             <td class="px-6 py-4">منتجات غير محدودة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">WordPress + Woo</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">10,000</span>
                                 <script>document.write(getWhatsappBtn('متجر WooCommerce', '10,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-orange-600 font-bold">5$ - 20$</td>
                             <td class="px-6 py-4">Shared / VPS</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -266,12 +311,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">نظام حجز مواعيد</td>
                             <td class="px-6 py-4">تقويم، حجز، ورديات</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">12,000</span>
                                 <script>document.write(getWhatsappBtn('نظام حجز مواعيد', '12,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
                             <td class="px-6 py-4">Vercel + Supabase</td>
                             <td class="px-6 py-4 text-blue-600 font-bold">جيد</td>
@@ -284,12 +327,10 @@
                             <td class="px-6 py-4 font-bold text-secondary">موقع عقارات / دليل</td>
                             <td class="px-6 py-4">بحث متقدم، فلترة</td>
                             <td class="px-6 py-4 font-mono text-xs text-primary">Next.js + Supabase</td>
-                            
                             <td class="px-6 py-4 relative min-w-[140px] text-center pb-8">
                                 <span class="price-text font-bold text-lg text-emerald-600">15,000</span>
                                 <script>document.write(getWhatsappBtn('موقع عقارات', '15,000 ج.م'))</script>
                             </td>
-
                             <td class="px-6 py-4 text-orange-600 font-bold">مجاني ثم ~25$</td>
                             <td class="px-6 py-4">Vercel + Supabase</td>
                             <td class="px-6 py-4 text-green-600 font-bold">ممتاز</td>
@@ -335,13 +376,45 @@
         </section>
 
         <!-- القسم الثالث: الإضافات والعروض -->
-        <section class="bg-secondary text-white rounded-2xl p-8 shadow-lg">
+        <section class="bg-secondary text-white rounded-2xl p-6 md:p-8 shadow-lg">
             <div class="text-center mb-8">
                 <h2 class="text-2xl md:text-3xl font-bold mb-2">إضافات مدفوعة (Add-ons)</h2>
                 <p class="text-sky-200">عروض وخصومات حصرية لفترة محدودة</p>
             </div>
 
-            <div class="overflow-x-auto">
+            <!-- Mobile Addons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
+                <script>
+                    function getMobileAddon(name, desc, originalPrice, price, discount) {
+                        const phone = "201024531452";
+                        const text = encodeURIComponent(`مرحباً GAMALTECH، أرغب في إضافة: ${name} بسعر ${price}`);
+                        return `
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 hover:bg-white/20 transition-colors">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-sky-300 text-xs"></i> ${name}
+                                </h3>
+                                <div class="text-left">
+                                    <span class="block text-slate-400 line-through text-xs">${originalPrice}</span>
+                                    <span class="block bg-emerald-500 text-white px-2 py-0.5 rounded text-sm font-bold">${price}</span>
+                                    <span class="block text-xs text-emerald-300 mt-1">${discount}</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-sky-100 mb-4">${desc}</p>
+                            <a href="https://wa.me/${phone}?text=${text}" target="_blank" class="block w-full text-center bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg text-sm font-bold transition">
+                                إضافة للطلب
+                            </a>
+                        </div>`;
+                    }
+                    document.write(getMobileAddon('الموظف الذكي (AI Agent)', 'شات بوت ذكي يرد على العملاء 24/7', '4,000 ج.م', '1,200 ج.م', 'خصم 70%'));
+                    document.write(getMobileAddon('تهيئة SEO والخرائط', 'Sitemap وربط Google Console', '500 ج.م', '250 ج.م', 'خصم 50%'));
+                    document.write(getMobileAddon('الوضع الليلي (Dark Mode)', 'زر تبديل الإضاءة', '1,000 ج.م', '500 ج.م', 'خصم 50%'));
+                    document.write(getMobileAddon('موقع ثنائي اللغة', 'إضافة لغة ثانية ولوحة تحكم', '2,500 ج.م', '1,250 ج.م', 'خصم 50%'));
+                </script>
+            </div>
+
+            <!-- Desktop Addons Table -->
+            <div class="hidden lg:block overflow-x-auto">
                 <table class="w-full text-right border-separate border-spacing-y-3">
                     <thead>
                         <tr class="text-sky-200 text-sm">
@@ -360,7 +433,6 @@
                             </td>
                             <td class="px-4 py-4 text-sm text-sky-100">شات بوت ذكي يرد على العملاء 24/7</td>
                             <td class="px-4 py-4 text-slate-400 line-through">4,000 ج.م</td>
-                            
                             <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
                                 <div class="price-text">
                                     <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">1,200 ج.م</span>
@@ -375,7 +447,6 @@
                             <td class="px-4 py-4 rounded-r-lg font-bold">تهيئة SEO والخرائط</td>
                             <td class="px-4 py-4 text-sm text-sky-100">Sitemap وربط Google Console</td>
                             <td class="px-4 py-4 text-slate-400 line-through">500 ج.م</td>
-                            
                             <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
                                 <div class="price-text">
                                     <span class="text-white font-bold">250 ج.م</span>
@@ -390,7 +461,6 @@
                             <td class="px-4 py-4 rounded-r-lg font-bold">الوضع الليلي (Dark Mode)</td>
                             <td class="px-4 py-4 text-sm text-sky-100">زر تبديل الإضاءة</td>
                             <td class="px-4 py-4 text-slate-400 line-through">1,000 ج.م</td>
-                            
                             <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
                                 <div class="price-text">
                                     <span class="text-white font-bold">500 ج.م</span>
@@ -405,7 +475,6 @@
                             <td class="px-4 py-4 rounded-r-lg font-bold">موقع ثنائي اللغة</td>
                             <td class="px-4 py-4 text-sm text-sky-100">إضافة لغة ثانية ولوحة تحكم مزدوجة</td>
                             <td class="px-4 py-4 text-slate-400 line-through">2,500 ج.م</td>
-                            
                             <td class="px-4 py-4 rounded-l-lg relative min-w-[140px] text-center pb-8">
                                 <div class="price-text">
                                     <span class="text-white font-bold">1,250 ج.م</span>
